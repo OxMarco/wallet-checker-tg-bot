@@ -42,7 +42,7 @@ export const generateMarkdownSummaryForDeFi = (positions: any): string => {
   }
 
   let table = new AsciiTable3("DeFi Portfolio");
-  table.setHeading("Protocol", "Token", "Balance in $", "APY");
+  table.setHeading("Protocol", "Balance", "APY");
   table.setAlign(2, AlignmentEnum.RIGHT);
 
   positions.forEach((position: any) => {
@@ -53,7 +53,7 @@ export const generateMarkdownSummaryForDeFi = (positions: any): string => {
     } = position;
     const balanceFormatted = `$${balance_usd.toFixed(2)}`;
     const apyFormatted = net_apy ? `${(net_apy * 100).toFixed(2)}%` : "N/A";
-    table.addRow(protocol_name, label, balanceFormatted, apyFormatted);
+    table.addRow(protocol_name + ' ' + label, balanceFormatted, apyFormatted);
   });
 
   return table.toString();
@@ -65,14 +65,14 @@ export const generateSummaryForTokens = (data: any): string => {
   }
 
   let table = new AsciiTable3("Token Portfolio");
-  table.setHeading("Token", "Balance", "Value in $");
+  table.setHeading("Token", "Balance", "Value");
   table.setAlign(2, AlignmentEnum.RIGHT);
 
   data.result.forEach((token: any) => {
     const { symbol, balance_formatted, usd_value } = token;
     if (usd_value !== null) {
       const valueFormatted = `$${usd_value.toFixed(2)}`;
-      table.addRow(symbol, balance_formatted, valueFormatted);
+      table.addRow(symbol, balance_formatted.toFixed(4), valueFormatted);
     }
   });
 
