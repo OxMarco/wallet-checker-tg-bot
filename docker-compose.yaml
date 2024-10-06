@@ -1,0 +1,15 @@
+services:
+  bot:
+    build: .
+    container_name: tgbot
+    restart: unless-stopped
+    ports:
+      - "3333:3333"
+    environment:
+      TELEGRAM_BOT_TOKEN: "${TELEGRAM_BOT_TOKEN}"
+      MORALIS_API_KEY: "${MORALIS_API_KEY}"
+    volumes:
+      - tgbot_data_container:/data/tgbot
+
+volumes:
+  tgbot_data_container:
