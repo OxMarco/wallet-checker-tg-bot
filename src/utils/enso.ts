@@ -29,9 +29,9 @@ export const quote = async (
     const data = await response.json();
     console.log(data);
     return data;
-  } catch (error) {
-    logger.error("Error:", error);
-    throw error;
+  } catch (err) {
+    logger.error({ msg: "Error in enso:", err });
+    throw err;
   }
 };
 
@@ -61,9 +61,9 @@ export const execute = async (
     const data = await response.json();
     console.log(data);
     return data;
-  } catch (error) {
-    logger.error("Error:", error);
-    throw error;
+  } catch (err) {
+    logger.error({ msg: "Error in enso:", err });
+    throw err;
   }
 };
 

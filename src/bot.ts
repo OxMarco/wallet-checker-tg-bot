@@ -58,5 +58,5 @@ async function main() {
 }
 
 main().catch((err) => {
-  logger.error("Error in the bot operation:", err);
+  logger.error({ msg: "Error in the bot operation:", err });
 });

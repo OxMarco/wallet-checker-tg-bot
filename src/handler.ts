@@ -36,10 +36,10 @@ export async function handleMessage(ctx: Context) {
     if (userState?.setWalletRequested) {
       await handleSetWallet(ctx);
     } else {
-      await ctx.reply("Please select an option from the menu.");
+      await ctx.reply("Please select an option from the menu");
     }
-  } catch (error) {
-    logger.error("Error in handleMessage:", error);
+  } catch (err) {
+    logger.error({ msg: "Error in handleMessage:", err });
     await ctx.reply("An error occurred while processing your request");
   }
 }
@@ -58,8 +58,8 @@ export async function handleButtonClick(ctx: Context) {
     } else {
       await ctx.reply("Unknown button clicked");
     }
-  } catch (error) {
-    logger.error("Error in handleButtonClick:", error);
+  } catch (err) {
+    logger.error({ msg: "Error in handleButtonClick:", err });
     await ctx.reply("An error occurred while processing your request");
   }
 }
@@ -95,8 +95,8 @@ export async function handleCheckBalance(ctx: Context) {
 
     await ctx.reply("```\n" + tokenSummary + "```", { parse_mode: "Markdown" });
     await ctx.reply("```\n" + defiSummary + "```", { parse_mode: "Markdown" });
-  } catch (error) {
-    logger.error("Error in handleCheckBalance:", error);
+  } catch (err) {
+    logger.error({ msg: "Error in handleCheckBalance:", err });
     await ctx.reply("An error occurred while processing your request");
   }
 }
@@ -120,8 +120,8 @@ Select an option below to start:
       parse_mode: "Markdown",
     });
     await ctx.api.pinChatMessage(ctx.chat.id, msg.message_id);
-  } catch (error) {
-    logger.error("Error in handleStart:", error);
+  } catch (err) {
+    logger.error({ msg: "Error in handleStart:", err });
     await ctx.reply("An error occurred while processing your request");
   }
 }
@@ -137,8 +137,8 @@ export async function handleShowMenu(ctx: Context) {
       reply_markup: menuKeyboard,
       parse_mode: "Markdown",
     });
-  } catch (error) {
-    logger.error("Error in handleShowMenu:", error);
+  } catch (err) {
+    logger.error({ msg: "Error in handleShowMenu:", err });
     await ctx.reply("An error occurred while processing your request");
   }
 }
@@ -151,8 +151,8 @@ export async function handleShowInfo(ctx: Context) {
 
   try {
     await ctx.reply("This bot was developed by OxMarco");
-  } catch (error) {
-    logger.error("Error in handleShowInfo:", error);
+  } catch (err) {
+    logger.error({ msg: "Error in handleShowInfo:", err });
     await ctx.reply("An error occurred while processing your request");
   }
 }

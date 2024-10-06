@@ -62,8 +62,8 @@ export async function handleAskChain(ctx: Context) {
 
   try {
     await ctx.reply("Change default chain:", { reply_markup: chainMenu });
-  } catch (error) {
-    logger.error("Error in handleAskChain:", error);
+  } catch (err) {
+    logger.error({ msg: "Error in handleAskChain:", err });
     await ctx.reply("An error occurred while processing your request");
   }
 }

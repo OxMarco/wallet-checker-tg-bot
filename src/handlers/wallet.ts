@@ -15,8 +15,8 @@ export async function handleAskWallet(ctx: Context) {
       reply_markup: { force_reply: true },
     });
     updateUserState(ctx.from.id, { setWalletRequested: true });
-  } catch (error) {
-    logger.error("Error in handleAskWallet:", error);
+  } catch (err) {
+    logger.error({ msg: "Error in handleAskWallet:", err });
     await ctx.reply("An error occurred while processing your request");
   }
 }
@@ -34,14 +34,12 @@ export async function handleSetWallet(ctx: Context) {
     if (userState?.setWalletRequested) {
       const walletAddress = ctx.message.text.trim() || "";
 
+      updateUserState(userId, { setWalletRequested: false });
       if (!isAddress(walletAddress)) {
-        await ctx.reply("Invalid wallet address, please send it again", {
-          reply_markup: { force_reply: true },
-        });
+        await ctx.reply("Invalid wallet address, please run the command again");
         return;
       }
 
-      updateUserState(userId, { setWalletRequested: false });
       await setUserData({ userId, wallet: walletAddress });
       await ctx.reply(`Wallet address set to: *${walletAddress}*`, {
         parse_mode: "Markdown",
@@ -49,8 +47,8 @@ export async function handleSetWallet(ctx: Context) {
     } else {
       await ctx.reply("Please select an option from the menu.");
     }
-  } catch (error) {
-    logger.error("Error in handleSetWallet:", error);
+  } catch (err) {
+    logger.error({ msg: "Error in handleSetWallet:", err });
     await ctx.reply("An error occurred while processing your request");
   }
 }
