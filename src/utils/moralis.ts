@@ -1,6 +1,5 @@
 import Moralis from "moralis";
 import { AsciiTable3, AlignmentEnum } from "ascii-table3";
-import { logger } from "./logger";
 
 export const getWalletBalance = async (
   chainId: number,
